@@ -6,9 +6,9 @@ import { ProductDetailsComponent } from './shop/product-details.component';
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, data: {breadcrumb: 'Home'}},
   {path: 'shop', loadChildren: () => import('./shop/shop.module')
-  .then(mod => mod.ShopModule)}, // Lazy loading; The shop modul will be activated when acces the shop part
+  .then(mod => mod.ShopModule), data: {breadcrumb: 'Shop'}}, // Lazy loading; The shop modul will be activated when acces the shop part
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
