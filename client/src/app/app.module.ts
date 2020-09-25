@@ -20,8 +20,8 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptors';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    NgxSpinnerModule,
-    HomeModule
+    HomeModule,
+    NgxSpinnerModule
   ],
   providers: [
     {

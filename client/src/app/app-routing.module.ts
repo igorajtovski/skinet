@@ -8,7 +8,9 @@ import { ProductDetailsComponent } from './shop/product-details.component';
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {breadcrumb: 'Home'}},
   {path: 'shop', loadChildren: () => import('./shop/shop.module')
-  .then(mod => mod.ShopModule), data: {breadcrumb: 'Shop'}}, // Lazy loading; The shop modul will be activated when acces the shop part
+  .then(mod => mod.ShopModule), data: {breadcrumb: 'Shop'}}, // Lazy loading; The shop module will be activated when acces the shop part
+  { path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule), data: { breadcrumb: 'Basket' } },
+  { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule), data: { breadcrumb: 'Checkout' } },
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
