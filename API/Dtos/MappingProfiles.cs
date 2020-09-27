@@ -14,6 +14,8 @@ namespace API.Dtos
             ForMember(d=>d.ProductType, o=>o.MapFrom(s=>s.ProductType.Name)).
             ForMember(d=>d.PictureUrl, o=>o.MapFrom<productUrlResolver>());
             CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemDto, BasketItem>();
         }
     }
 }
