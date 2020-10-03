@@ -12,9 +12,13 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            // definirani servisi da bidat dostapni da moze da se injectiraat bilo kade da treba niz aplikacijata
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IOrderService, OrderService>();
+            //services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
-            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
               services.Configure<ApiBehaviorOptions> (options => {
                 options.InvalidModelStateResponseFactory = actionContext => //actionContext is where we can get model state errors
