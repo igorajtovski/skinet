@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { IBasket, IBasketItem, Basket, IBasketTotals } from '../shared/models/basket';
 import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/product';
+import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 // import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 
 @Injectable({
@@ -29,14 +30,14 @@ export class BasketService {
   //     );
   // }
 
-  // setShippingPrice(deliveryMethod: IDeliveryMethod) {
-  //   this.shipping = deliveryMethod.price;
-  //   const basket = this.getCurrentBasketValue();
-  // //  basket.deliveryMethodId = deliveryMethod.id;
-  //  // basket.shippingPrice = deliveryMethod.price;
-  // //  this.calculateTotals();
-  //   this.setBasket(basket);
-  // }
+   setShippingPrice(deliveryMethod: IDeliveryMethod) {
+     this.shipping = deliveryMethod.price;
+     // const basket = this.getCurrentBasketValue();
+   // basket.deliveryMethodId = deliveryMethod.id;
+    // basket.shippingPrice = deliveryMethod.price;
+     this.calculateTotals();
+    // this.setBasket(basket);
+   }
 
   getBasket(id: string) {
     return this.http.get(this.baseUrl + 'basket?id=' + id)
@@ -102,11 +103,11 @@ export class BasketService {
     }
    }
 
-  // deleteLocalBasket(id: string) {
-  //   this.basketSource.next(null);
-  //   this.basketTotalSource.next(null);
-  //   localStorage.removeItem('basket_id');
-  // }
+   deleteLocalBasket(id: string) {
+     this.basketSource.next(null);
+     this.basketTotalSource.next(null);
+     localStorage.removeItem('basket_id');
+   }
 
   deleteBasket(basket: IBasket) {
      return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(() => {
@@ -120,8 +121,8 @@ export class BasketService {
 
    private calculateTotals() {
      const basket = this.getCurrentBasketValue();
-     const shipping = 0;
-     // vo subtotal presmetuvam za sekoj prouct posebno kolicina po cenata na prductot (primer 2 stavki od istiot product po cenata)
+     const shipping = this.shipping;
+     // vo subtotal presmetuvam za sekoj product posebno kolicina po cenata na prductot (primer 2 stavki od istiot product po cenata)
      const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
      const total = subtotal + shipping;
      this.basketTotalSource.next({shipping, total, subtotal});
