@@ -1,11 +1,12 @@
 <div class="container">
     <ul class="nav nav-pills nav-justified">
         <li class="nav-item" *ngFor="let step of steps; let i = index">
-            <button 
+            <button
                 (click)="onCLick(i)"
+                [disabled]="true"
                 [class.active]="selectedIndex === i"
-                class="nav-link py-3 text-uppercase font-weight-bold btn-block">
-                {{step.label}}:{{step.completed}}
+                class="nav-link text-uppercase font-weight-bold btn-block" style="padding: 1.20em;">
+                {{step.label}}<!--:{{step.completed}} da ne se gleda true/false(dali se poplneti polinjata na formite) na tabovite vo checkout formata--> 
             </button>
         </li>
     </ul>
